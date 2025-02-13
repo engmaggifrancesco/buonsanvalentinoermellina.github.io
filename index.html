@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Buon San Valentino, Amore</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .slideshow {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            display: none;
+        }
+
+        .slide {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #666;
+        }
+
+        button {
+            background: #ff4b6e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #ff4b6e;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        #audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❤️ Buon San Valentino Amorino Mio ❤️</h1>
+        
+        <button id="startButton">Clicca qui!</button>
+        
+        <div class="slideshow" id="slideshow">
+            <div class="image-slides">
+                <div class="slide active" id="slide1">
+                    <img src="1.jpg" alt="Foto 1">
+                    <div class="caption">La nostra prima volta insieme a Venezia ❤️</div>
+                </div>
+    
+                <div class="slide" id="slide2">
+                    <img src="2.jpg" alt="Foto 2">
+                    <div class="caption">La nostra prima vacanza insieme 🐬</div>
+                </div>
+    
+                <div class="slide" id="slide3">
+                    <img src="3.jpg" alt="Foto 3">
+                    <div class="caption">Insieme in mezzo al vento e al sale dei fenicotteri rosa 🦩</div>
+                </div>
+    
+                <div class="slide" id="slide4">
+                    <img src="4.jpg" alt="Foto 4">
+                    <div class="caption">Le nostre risate insieme ❤️</div>
+                </div>
+    
+                <div class="slide" id="slide5">
+                    <img src="5.jpg" alt="Foto 5">
+                    <div class="caption">Ma sei fidanzata con una piantina?🌿</div>
+                </div>
+    
+                <div class="slide" id="slide6">
+                    <img src="6.jpg" alt="Foto 6">
+                    <div class="caption">Te che sei una golosona...</div>
+                </div>
+    
+                <div class="slide" id="slide7">
+                    <img src="7.jpg" alt="Foto 7">
+                    <div class="caption">...anche di wasabi</div>
+                </div>
+    
+                <div class="slide" id="slide8">
+                    <img src="8.jpg" alt="Foto 8">
+                    <div class="caption">Insieme anche in Belgio...</div>
+                </div>
+    
+                <div class="slide" id="slide9">
+                    <img src="9.jpg" alt="Foto 9">
+                    <div class="caption">...con questa tremendissima ermellina 🐻‍❄️</div>
+                </div>
+    
+                <div class="slide" id="slide10">
+                    <img src="10.jpg" alt="Foto 10">
+                    <div class="caption">La nostra prima volta a Parigi insieme ❤️</div>
+                </div>
+    
+                <div class="slide" id="slide11">
+                    <img src="11.jpg" alt="Foto 11">
+                    <div class="caption">E il nostro primo capodanno insieme ❤️</div>
+                </div>
+    
+                <div class="slide" id="slide12">
+                    <img src="12.jpg" alt="Foto 12">
+                    <div class="caption">Te che sei bellissima e talentuosa 🎨</div>
+                </div>
+    
+                <div class="slide" id="slide13">
+                    <img src="13.jpg" alt="Foto 13">
+                    <div class="caption">Ti amo e ti amerò ovunque e per sempre ❤️</div>
+                </div>
+    
+                <div class="slide" id="slide14">
+                    <img src="14.jpg" alt="Foto 14">
+                    <div class="caption">❤️ Perché non c'è sensazione più bella di stare con te, TI AMO. ❤️</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="prevButton">❮ Precedente</button>
+                <button id="nextButton">Successiva ❯</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio" loop>
+        <source src="when i look in your eyes.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const audio = document.getElementById('audio');
+        const slideshow = document.getElementById('slideshow');
+        
+        document.getElementById('startButton').addEventListener('click', () => {
+            slideshow.style.display = 'block';
+            audio.play();
+            document.getElementById('startButton').style.display = 'none';
+        });
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        document.getElementById('prevButton').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+    </script>
+</body>
+</html>
